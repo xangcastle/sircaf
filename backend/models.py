@@ -1,5 +1,6 @@
 from django.db import models
 from grappelli_extras.models import base
+from django.db.models import IntegerChoices
 
 
 class Group(base):
