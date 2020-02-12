@@ -5,7 +5,7 @@ dj-database-url==0.5.0
 Django==3.0.2
 django-adminactions==1.8.1
 django-grappelli==2.13.3
-django-grappelli-extras==1.2.1
+django-grappelli-extras==1.2.3
 django-heroku==0.3.1
 django-import-export==2.0.1
 et-xmlfile==1.0.1
