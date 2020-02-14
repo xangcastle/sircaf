@@ -3,17 +3,6 @@ from .forms import *
 from import_export.admin import ImportExportModelAdmin
 
 
-@admin.register(Brand)
-class BrandAdmin(admin.ModelAdmin):
-    list_display = ('name', )
-    search_fields = ('name', )
-
-
-@admin.register(Status)
-class StatusAdmin(ImportExportModelAdmin):
-    list_display = ('name', )
-    search_fields = ('name', )
-
 
 class GroupFieldTabular(admin.TabularInline):
     model = GroupField
@@ -26,12 +15,6 @@ class GroupAdmin(admin.ModelAdmin):
     list_display = ('name', )
     search_fields = ('name', )
     inlines = [GroupFieldTabular, ]
-
-
-@admin.register(Country)
-class CountryAdmin(ImportExportModelAdmin):
-    list_display = ('name', )
-    search_fields = ('name', )
 
 
 @admin.register(Area)

@@ -1,6 +1,7 @@
 from django.db import models
 from grappelli_extras.models import base
 from django.contrib.auth.models import User
+from utils.models import *
 
 
 class Group(base):
@@ -31,27 +32,6 @@ class GroupField(base):
         verbose_name = "campo"
 
 
-class Brand(base):
-    name = models.CharField(max_length=65, verbose_name="marca")
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "marca"
-
-
-class Country(base):
-    name = models.CharField(max_length=65, verbose_name="pais")
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "pais"
-        verbose_name_plural = "paises"
-
-
 class Area(base):
     name = models.CharField(max_length=65, verbose_name="nombre")
     country = models.ForeignKey(Country, null=True, on_delete=models.SET_NULL,
@@ -62,16 +42,6 @@ class Area(base):
 
     class Meta:
         verbose_name = "área"
-
-
-class Status(base):
-    name = models.CharField(max_length=65, verbose_name="estado")
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "estado"
 
 
 class Active(base):
