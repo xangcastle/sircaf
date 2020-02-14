@@ -48,16 +48,29 @@ class ActiveAdmin(ImportExportModelAdmin):
     list_filter = ('group', 'area', 'brand', 'status')
 
     fieldsets = [
-        ('Información general del activo', {
+        ('Descripción del activo', {
             'classes': ('grp-collapse', 'grp-open'),
             'fields': (
                 ('code', 'description'),
                 ('group', 'serial'),
                 ('brand', 'model_name'),
                 ('area', 'status'),
+            )
+        }),
+        ('Información adicional', {
+            'classes': ('grp-collapse', 'grp-open'),
+            'fields': (
+                ('purchase_date', 'dispose_date'),
+                ('username', 'user_function'),
+                ('leasing', ),
+            )
+        }),
+        ('Otros datos', {
+            'classes': ('grp-collapse', 'grp-open'),
+            'fields': (
                 ('info',),
             )
-        })
+        }),
     ]
 
 

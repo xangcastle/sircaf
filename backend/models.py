@@ -84,6 +84,13 @@ class Active(base):
     status = models.ForeignKey(Status, on_delete=models.CASCADE, verbose_name="estado")
     area = models.ForeignKey(Area, on_delete=models.CASCADE, verbose_name="area", null=True)
     serial = models.CharField(max_length=25, null=True, blank=True)
+
+    purchase_date = models.DateField(null=True, blank=True)
+    dispose_date = models.DateField(null=True, blank=True)
+    username = models.CharField(max_length=165, null=True, blank=True)
+    user_function = models.CharField(max_length=165, null=True, blank=True)
+    leasing = models.CharField(max_length=25, null=True, blank=True)
+
     info = models.CharField(max_length=10000, null=True, blank=True, verbose_name="información adicional")
 
     def __str__(self):
