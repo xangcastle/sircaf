@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .forms import *
 from import_export.admin import ImportExportModelAdmin
 
 
@@ -42,6 +42,7 @@ class AreaAdmin(ImportExportModelAdmin):
 
 @admin.register(Active)
 class ActiveAdmin(ImportExportModelAdmin):
+    form = ActiveForm
     list_display = ('code', 'brand', 'model_name', 'serial', 'status', 'group')
     search_fields = ('code', 'description', 'brand__name', 'model_name', 'serial')
     list_filter = ('group', 'area', 'brand', 'status')
@@ -54,7 +55,42 @@ class ActiveAdmin(ImportExportModelAdmin):
                 ('group', 'serial'),
                 ('brand', 'model_name'),
                 ('area', 'status'),
+                ('info',),
             )
         })
     ]
+
+
+class ItemsTabular(admin.TabularInline):
+    model = TranslateItem
+    classes = ('grp-collapse', 'grp-open')
+    fields = ('active', 'status', 'comments')
+    extra = 1
+    raw_id_fields = ('active',)
+    autocomplete_lookup_fields = {
+        'fk': ['active'],
+    }
+
+
+@admin.register(Translate)
+class TranslateAdmin(admin.ModelAdmin):
+    date_hierarchy = 'date_time'
+    list_display = ('number', 'date_time', 'origin_area', 'destiny_area', 'user')
+    list_filter = ('origin_area', 'destiny_area')
+    search_fields = ('number', 'origin_area__name')
+
+    fieldsets = (
+        ('Informacón del traslado', {
+            'classes': ('grp-collapse', 'grp-open'),
+            'fields': (
+                ('number', 'date_time'),
+                ('origin_area', 'destiny_area'),
+                ('origin_person', 'destiny_person'),
+                ('origin_charge', 'destiny_charge'),
+                ('comments',),
+            )
+        }),
+    )
+
+    inlines = [ItemsTabular, ]
 
