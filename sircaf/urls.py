@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', admin.site.urls),
+    path('backend/', include('backend.urls')),
     path('grappelli/', include('grappelli.urls')),
     path('admin/ajax/', include('grappelli_extras.ajax_urls')),
 ]

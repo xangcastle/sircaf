@@ -12,17 +12,6 @@ class Brand(base):
         verbose_name = "marca"
 
 
-class Country(base):
-    name = models.CharField(max_length=65, verbose_name="pais")
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "pais"
-        verbose_name_plural = "paises"
-
-
 class Status(base):
     name = models.CharField(max_length=65, verbose_name="estado")
 
@@ -31,3 +20,41 @@ class Status(base):
 
     class Meta:
         verbose_name = "estado"
+
+
+class Group(base):
+    name = models.CharField(max_length=255, verbose_name="nombre")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "grupo"
+
+
+INPUT_TYPES = (
+    ('TEXT', 'TEXT'),
+)
+
+
+class GroupField(base):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name="fields")
+    name = models.CharField(max_length=65, verbose_name="nombre en la base de datos")
+    label = models.CharField(max_length=65, verbose_name="etiqueta para el usuario")
+    input_type = models.CharField(max_length=4, choices=INPUT_TYPES)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "campo"
+
+
+class Area(base):
+    name = models.CharField(max_length=65, verbose_name="nombre")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "área"

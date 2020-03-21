@@ -14,9 +14,3 @@ class StatusAdmin(ImportExportModelAdmin):
     list_display = ('name', )
     search_fields = ('name', )
 
-
-@admin.register(Country)
-class CountryAdmin(ImportExportModelAdmin):
-    list_display = ('name', )
-    search_fields = ('name', )
-

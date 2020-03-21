@@ -1,0 +1,73 @@
+{% extends 'admin/index.html' %}
+
+
+
+{% block content %}
+
+    <style type="text/css">
+        #chartmarcas, #chartestado, #chartarea{
+            min-height: 400px;
+        }
+    </style>
+
+    <div class="dashboard">
+        <div id="chartmarcas"></div>
+        <div id="chartestado"></div>
+        <div id="chartarea"></div>
+    </div>
+
+
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ready(function () {
+
+                $.ajax("{% url 'dashboard' %}", {
+                    method: "POST",
+                    data: {},
+                    success: function (response) {
+                        let marcas = new CanvasJS.Chart("chartmarcas", {
+                            title: {
+                                text: "Activos por marca"
+                            },
+                            data: [
+                                {
+                                    type: "column",
+                                    dataPoints: response.marcas,
+                                }
+                            ]
+                        });
+                        marcas.render();
+                        let estados = new CanvasJS.Chart("chartestado", {
+                            title: {
+                                text: "Activos por estado"
+                            },
+                            data: [
+                                {
+                                    type: "column",
+                                    dataPoints: response.estados,
+                                }
+                            ]
+                        });
+                        estados.render();
+                        let area = new CanvasJS.Chart("chartarea", {
+                            title: {
+                                text: "Activos por área"
+                            },
+                            data: [
+                                {
+                                    type: "column",
+                                    dataPoints: response.areas,
+                                }
+                            ]
+                        });
+                        area.render();
+                    }
+                });
+
+            })
+        })(grp.jQuery)
+    </script>
+{% endblock %}
